@@ -74,7 +74,6 @@ var link = {
         if (!branchKey) return Promise.reject(new Error('Missing branchKey'));
 
         if (!data) data = {};
-        if (!data.type) data.type = 2;
         if (!data.branch_key) data.branch_key = branchKey;
 
         var path = '/v1/url';
@@ -86,10 +85,6 @@ var link = {
     createMany: function(branchKey, data) {
         if (!data) return Promise.reject(new Error('Missing data'));
         if (!branchKey) return Promise.reject(new Error('Missing branchKey'));
-
-        data.forEach(function(link) {
-            if (!link.type) link.type = 2;
-        });
 
         var path = '/v1/url/bulk/' + branchKey;
         return request(path, 'POST', data).then(function(res) {
